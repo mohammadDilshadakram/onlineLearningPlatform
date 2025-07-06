@@ -1,4 +1,4 @@
- import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress"
 import { PlayCircle } from "lucide-react";
 
@@ -31,9 +31,16 @@ function EnrollCourseCard({ course,enrollCourse }) {
         <h2 className="flex justify-between text-sm text-primary">Progress<span>{CalculatePerProgress()}%</span></h2>
         <Progress value={CalculatePerProgress()} />
       
-        <Link href={'/workspace/view-course/'+course?.cid}>
-        <Button className={'w-full mt-3'}><PlayCircle/>Continue Learning</Button>
-        </Link>
+        <div className="flex items-center gap-2 mt-3">
+          <Link href={'/workspace/view-course/'+course?.cid} className="w-full">
+            <Button className={'w-full'}><PlayCircle/>Continue Learning</Button>
+          </Link>
+          {CalculatePerProgress() === 100 &&
+            <Link href={`/course/${course?.cid}/quiz`}>
+              <Button variant="outline">Quiz</Button>
+            </Link>
+          }
+        </div>
         
       </div>
     </div>
